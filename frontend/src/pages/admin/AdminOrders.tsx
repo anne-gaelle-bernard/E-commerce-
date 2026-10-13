@@ -46,7 +46,7 @@ export function AdminOrders() {
         </div>
       </div>
       {error && <Alert>{error}</Alert>}
-      <table className="table">
+      <table className="table table-responsive">
         <thead>
           <tr>
             <th scope="col">N°</th>
@@ -61,17 +61,17 @@ export function AdminOrders() {
           {orders.map((o) => (
             <Fragment key={o.id}>
               <tr>
-                <td>
+                <td data-label="N°">
                   <button type="button" className="link-button" aria-expanded={openId === o.id}
                     onClick={() => setOpenId(openId === o.id ? null : o.id)}>
                     #{o.id}
                   </button>
                 </td>
-                <td>{formatDate(o.createdAt)}</td>
-                <td>{o.user ? `${o.user.firstName} ${o.user.lastName}` : <em className="muted">Compte supprimé</em>}</td>
-                <td>{formatPrice(o.totalCents)}</td>
-                <td><StatusTag status={o.status} /></td>
-                <td className="actions">
+                <td data-label="Date">{formatDate(o.createdAt)}</td>
+                <td data-label="Client">{o.user ? `${o.user.firstName} ${o.user.lastName}` : <em className="muted">Compte supprimé</em>}</td>
+                <td data-label="Total">{formatPrice(o.totalCents)}</td>
+                <td data-label="Statut"><StatusTag status={o.status} /></td>
+                <td data-label="Actions" className="actions">
                   {NEXT_STATUSES[o.status].map((s) => (
                     <button key={s} type="button" className={s === "CANCELLED" ? "link-button danger" : "link-button"}
                       onClick={() => changeStatus(o, s)}>
@@ -82,7 +82,7 @@ export function AdminOrders() {
               </tr>
               {openId === o.id && (
                 <tr>
-                  <td colSpan={6}><OrderDetail order={o} /></td>
+                  <td className="row-detail" colSpan={6}><OrderDetail order={o} /></td>
                 </tr>
               )}
             </Fragment>

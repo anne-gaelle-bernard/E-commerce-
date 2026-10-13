@@ -46,16 +46,16 @@ export function AdminCategories() {
         <FormField label="Nouvelle catégorie" required minLength={2} value={name} onChange={(e) => setName(e.target.value)} />
         <button type="submit" className="button">Ajouter</button>
       </form>
-      <table className="table">
+      <table className="table table-responsive">
         <thead>
           <tr><th scope="col">Nom</th><th scope="col">Produits</th><th scope="col">Actions</th></tr>
         </thead>
         <tbody>
           {categories.map((c) => (
             <tr key={c.id}>
-              <td>{c.name}</td>
-              <td>{c._count?.products ?? 0}</td>
-              <td className="actions">
+              <td data-label="Nom">{c.name}</td>
+              <td data-label="Produits">{c._count?.products ?? 0}</td>
+              <td data-label="Actions" className="actions">
                 <button type="button" className="link-button" onClick={() => rename(c)}>Renommer</button>
                 <button type="button" className="link-button danger" disabled={(c._count?.products ?? 0) > 0}
                   title={(c._count?.products ?? 0) > 0 ? "Catégorie utilisée par des produits" : undefined}

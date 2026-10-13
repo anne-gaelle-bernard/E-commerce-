@@ -29,7 +29,7 @@ export function AdminProducts() {
         <h1>Produits</h1>
         <Link to="/admin/produits/nouveau" className="button">+ Nouveau produit</Link>
       </div>
-      <table className="table">
+      <table className="table table-responsive">
         <thead>
           <tr>
             <th scope="col">Nom</th>
@@ -43,17 +43,17 @@ export function AdminProducts() {
         <tbody>
           {products.map((p) => (
             <tr key={p.id} className={p.isActive ? "" : "row-muted"}>
-              <td>
+              <td data-label="Produit">
                 <span className="admin-product">
                   <img src={p.imageUrl} alt="" width={40} height={52} className="admin-thumb" />
                   {p.name}
                 </span>
               </td>
-              <td>{p.category.name}</td>
-              <td>{formatPrice(p.priceCents)}</td>
-              <td>{p.variants.reduce((s, v) => s + v.stock, 0)}</td>
-              <td><span className={p.isActive ? "tag tag-delivered" : "tag"}>{p.isActive ? "En ligne" : "Archivé"}</span></td>
-              <td className="actions">
+              <td data-label="Catégorie">{p.category.name}</td>
+              <td data-label="Prix">{formatPrice(p.priceCents)}</td>
+              <td data-label="Stock total">{p.variants.reduce((s, v) => s + v.stock, 0)}</td>
+              <td data-label="Statut"><span className={p.isActive ? "tag tag-delivered" : "tag"}>{p.isActive ? "En ligne" : "Archivé"}</span></td>
+              <td data-label="Actions" className="actions">
                 <Link to={`/admin/produits/${p.id}`}>Modifier</Link>
                 {p.isActive && (
                   <button type="button" className="link-button" onClick={() => archive(p)}>Archiver</button>
@@ -94,7 +94,14 @@ export function AdminProductForm() {
       if (isNew && cats[0]) setForm((f) => ({ ...f, categoryId: cats[0].id }));
     });
     if (!isNew) {
-      api.admin.product(Number(id)).then((p) => {
+      api.admin
+        .product(Number(id))
+        .catch(() => {
+          setError("Produit introuvable");
+          return null;
+        })
+        .then((p) => {
+        if (!p) return;
         setForm({
           name: p.name,
           description: p.description,

@@ -97,7 +97,7 @@ export function CheckoutPage() {
         <li>Confirmation</li>
       </ol>
 
-      <div className="cart-layout">
+      <div className="cart-layout checkout-layout">
         <form onSubmit={handleSubmit} noValidate className="checkout-form">
           {error && <Alert>{error}</Alert>}
 

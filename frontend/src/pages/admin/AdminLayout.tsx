@@ -53,16 +53,16 @@ export function AdminDashboard() {
       {stats.lowStock.length === 0 ? (
         <p>Aucune déclinaison en stock faible.</p>
       ) : (
-        <table className="table">
+        <table className="table table-responsive">
           <thead>
             <tr><th scope="col">Produit</th><th scope="col">Déclinaison</th><th scope="col">Stock</th></tr>
           </thead>
           <tbody>
             {stats.lowStock.map((v) => (
               <tr key={v.id}>
-                <td><Link to={`/admin/produits/${v.product.id}`}>{v.product.name}</Link></td>
-                <td>{v.color} · {v.size}</td>
-                <td className={v.stock === 0 ? "field-error" : "warning"}>{v.stock}</td>
+                <td data-label="Produit"><Link to={`/admin/produits/${v.product.id}`}>{v.product.name}</Link></td>
+                <td data-label="Déclinaison">{v.color} · {v.size}</td>
+                <td data-label="Stock" className={v.stock === 0 ? "field-error" : "warning"}>{v.stock}</td>
               </tr>
             ))}
           </tbody>
