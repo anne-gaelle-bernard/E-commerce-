@@ -1,0 +1,44 @@
+# Environnement complet : base de données + API + front (servi par Nginx).
+# Développement : `docker compose up db` puis lancer backend et frontend en local.
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: boutique
+      POSTGRES_PASSWORD: boutique
+      POSTGRES_DB: boutique
+    ports:
+      - "55432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U boutique"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://boutique:boutique@db:5432/boutique
+      JWT_SECRET: ${JWT_SECRET:?Définir JWT_SECRET dans un fichier .env à la racine}
+      CLIENT_URL: http://localhost:8080
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+volumes:
+  db-data:
