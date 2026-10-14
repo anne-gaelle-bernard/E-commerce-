@@ -21,15 +21,15 @@ Accès : Public, Client (connecté) ou Admin.
 | Méthode | Route | Accès | Détail |
 |---|---|---|---|
 | GET | `/categories` | Public | Liste avec nombre de produits |
-| POST | `/categories` | Admin | `{ name }` |
-| PUT | `/categories/:id` | Admin | `{ name }` |
+| POST | `/categories` | Admin | `{ name, imageUrl? }` |
+| PUT | `/categories/:id` | Admin | `{ name, imageUrl? }` |
 | DELETE | `/categories/:id` | Admin | 409 si des produits y sont rattachés |
 | GET | `/products` | Public | Paramètres : `search`, `category` (slug), `gender`, `size`, `color`, `minPrice`, `maxPrice` (centimes), `sort` (`newest`, `price_asc`, `price_desc`, `name`), `page`, `limit` (≤ 50), `includeInactive` (admin) → `{ items, total, page, pages }` |
 | GET | `/products/filters` | Public | `{ sizes, colors }` disponibles |
-| GET | `/products/:slug` | Public | Produit + catégorie + déclinaisons |
+| GET | `/products/:slug` | Public | Produit + catégorie + déclinaisons + photos par couleur |
 | GET | `/products/id/:id` | Admin | Produit (même archivé) |
-| POST | `/products` | Admin | `{ name, description, priceCents, imageUrl, gender, categoryId, isActive, variants: [{ size, color, stock }] }` |
-| PUT | `/products/:id` | Admin | Même corps ; synchronise les déclinaisons |
+| POST | `/products` | Admin | `{ name, description, priceCents, imageUrl, gender, categoryId, isActive, variants: [{ size, color, stock }], images: [{ color, url }] }` (une photo au plus par couleur, et seulement pour une couleur déclinée) |
+| PUT | `/products/:id` | Admin | Même corps ; synchronise les déclinaisons et remplace les photos |
 | DELETE | `/products/:id` | Admin | Archivage (`isActive = false`) |
 
 ## Panier `/api/cart` (Client)

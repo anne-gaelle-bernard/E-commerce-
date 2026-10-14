@@ -15,7 +15,7 @@ Boutique de vêtements avec déclinaisons taille / couleur et stock, panier, com
 ## Fonctionnalités
 
 - **Boutique** : catalogue paginé, filtres (collection, catégorie, taille disponible, couleur, prix), recherche, tri,
-  fiche produit avec choix couleur / taille et stock en temps réel.
+  fiche produit avec choix couleur / taille, photo propre à chaque coloris et stock en temps réel. 27 articles en 8 catégories illustrées.
 - **Client** : inscription / connexion, panier serveur, commande avec adresse de livraison et paiement par carte
   (passerelle simulée, cartes de test),
   historique et suivi des commandes, modification du profil, export et suppression des données (RGPD).
@@ -67,8 +67,8 @@ docker compose exec api npx prisma db seed
 ## Tests
 
 ```bash
-cd backend && npm test    # 57 tests unitaires + intégration (base boutique_test)
-cd frontend && npm test   # 10 tests (composants, saisie de la carte)
+cd backend && npm test    # 59 tests unitaires + intégration (base boutique_test)
+cd frontend && npm test   # 11 tests (composants, saisie de la carte)
 ```
 
 ## Structure du projet

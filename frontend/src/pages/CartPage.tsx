@@ -5,6 +5,7 @@ import { useCart } from "../context/CartContext";
 import { Alert } from "../components/FormField";
 import { FREE_SHIPPING_THRESHOLD_CENTS, formatPrice, shippingCost } from "../lib/format";
 import { swatch } from "../lib/colors";
+import { imageFor } from "../lib/images";
 
 export function CartPage() {
   const { cart, update, remove } = useCart();
@@ -59,8 +60,8 @@ export function CartPage() {
               const max = Math.min(10, item.variant.stock);
               return (
                 <li key={item.id} className="cart-item">
-                  <Link to={`/produit/${product.slug}`} className="cart-item-image">
-                    <img src={product.imageUrl} alt="" width={120} height={160} />
+                  <Link to={`/produit/${product.slug}?couleur=${encodeURIComponent(item.variant.color)}`} className="cart-item-image">
+                    <img src={imageFor(product, item.variant.color)} alt="" width={120} height={160} />
                   </Link>
                   <div className="cart-item-info">
                     <Link to={`/produit/${product.slug}`} className="cart-item-name">

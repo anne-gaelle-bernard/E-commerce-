@@ -18,6 +18,17 @@ const SWATCHES: Record<string, string> = {
   Indigo: "#2c3a63",
   "Gris chiné": "#9a9a9a",
   "Gris anthracite": "#3f4245",
+  Gris: "#a3a3a0",
+  Chocolat: "#4a2f22",
+  Cognac: "#9a4a1f",
+  Crème: "#f1e9d6",
+  Naturel: "#e3d6bf",
+  "Bleu ciel": "#a9c6e8",
+  Délavé: "#7f9bb8",
+  // motifs : dégradé pour évoquer les rayures ou l’imprimé
+  "Rayé noir": "repeating-linear-gradient(0deg, #151515 0 2px, #f5f5f2 2px 4px)",
+  "Blanc fleuri": "radial-gradient(circle at 35% 35%, #c0392b 0 18%, #f5f5f2 20%)",
+  "Noir fleuri": "radial-gradient(circle at 35% 35%, #f5f5f2 0 18%, #151515 20%)",
 };
 
 export const swatch = (color: string) => SWATCHES[color] ?? "#cccccc";

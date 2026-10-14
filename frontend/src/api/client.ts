@@ -81,9 +81,10 @@ export const api = {
     updateProduct: (id: number, data: ProductInput) =>
       request<Product>(`/products/${id}`, { method: "PUT", body: json(data) }),
     archiveProduct: (id: number) => request<void>(`/products/${id}`, { method: "DELETE" }),
-    createCategory: (name: string) => request<Category>("/categories", { method: "POST", body: json({ name }) }),
-    updateCategory: (id: number, name: string) =>
-      request<Category>(`/categories/${id}`, { method: "PUT", body: json({ name }) }),
+    createCategory: (name: string, imageUrl?: string) =>
+      request<Category>("/categories", { method: "POST", body: json({ name, imageUrl: imageUrl || null }) }),
+    updateCategory: (id: number, name: string, imageUrl?: string | null) =>
+      request<Category>(`/categories/${id}`, { method: "PUT", body: json({ name, imageUrl: imageUrl || null }) }),
     deleteCategory: (id: number) => request<void>(`/categories/${id}`, { method: "DELETE" }),
   },
 };

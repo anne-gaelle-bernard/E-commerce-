@@ -82,6 +82,46 @@ describe("gestion des produits (admin)", () => {
     expect(variants.sort()).toEqual(["M:10", "S:1"]);
   });
 
+  it("enregistre une photo par couleur et les remplace à la modification", async () => {
+    const { category } = await createProduct();
+    await createUser("admin@test.fr", "ADMIN");
+    const admin = await loginAs("admin@test.fr");
+    const body = {
+      ...payload(category.id),
+      variants: [
+        { size: "M", color: "Gris", stock: 3 },
+        { size: "M", color: "Noir", stock: 2 },
+      ],
+      images: [
+        { color: "Gris", url: "https://example.com/gris.jpg" },
+        { color: "Noir", url: "https://example.com/noir.jpg" },
+      ],
+    };
+    const created = await admin.post("/api/products").send(body).expect(201);
+    expect(created.body.images.map((i: { color: string }) => i.color).sort()).toEqual(["Gris", "Noir"]);
+
+    const updated = await admin
+      .put(`/api/products/${created.body.id}`)
+      .send({ ...body, images: [{ color: "Noir", url: "https://example.com/noir-2.jpg" }] })
+      .expect(200);
+    expect(updated.body.images).toHaveLength(1);
+    expect(updated.body.images[0].url).toBe("https://example.com/noir-2.jpg");
+
+    const publicView = await request(app).get(`/api/products/${created.body.slug}`).expect(200);
+    expect(publicView.body.images).toHaveLength(1);
+  });
+
+  it("refuse une photo pour une couleur qui n'existe pas", async () => {
+    const { category } = await createProduct();
+    await createUser("admin@test.fr", "ADMIN");
+    const admin = await loginAs("admin@test.fr");
+    const res = await admin
+      .post("/api/products")
+      .send({ ...payload(category.id), images: [{ color: "Rouge", url: "https://example.com/rouge.jpg" }] })
+      .expect(400);
+    expect(res.body.details[0].field).toBe("images");
+  });
+
   it("archive un produit au lieu de le supprimer", async () => {
     const product = await createProduct();
     await createUser("admin@test.fr", "ADMIN");

@@ -17,10 +17,14 @@ const MARQUEE = ["Coton biologique", "Laine mérinos", "Lin lavé", "Fabriqué e
 
 export function HomePage() {
   const [latest, setLatest] = useState<Product[]>([]);
+  const [total, setTotal] = useState<number | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
-    api.products(new URLSearchParams({ sort: "newest", limit: "4" })).then((p) => setLatest(p.items));
+    api.products(new URLSearchParams({ sort: "newest", limit: "4" })).then((p) => {
+      setLatest(p.items);
+      setTotal(p.total);
+    });
     api.categories().then(setCategories);
   }, []);
 
@@ -42,7 +46,7 @@ export function HomePage() {
           <dl className="hero-stats">
             <div>
               <dt>Pièces</dt>
-              <dd>17</dd>
+              <dd>{total ?? "–"}</dd>
             </div>
             <div>
               <dt>Matières naturelles</dt>
@@ -97,13 +101,21 @@ export function HomePage() {
       </section>
 
       <section aria-labelledby="categories-title" className="home-section">
-        <h2 id="categories-title">Par catégorie</h2>
-        <ul className="category-list">
+        <div className="section-head">
+          <h2 id="categories-title">Par catégorie</h2>
+          <Link to="/catalogue" className="pill-link">
+            Tout voir →
+          </Link>
+        </div>
+        <ul className="category-grid">
           {categories.map((c) => (
             <li key={c.id}>
-              <Link to={`/catalogue?category=${c.slug}`} className="category-chip">
-                {c.name}
-                <span className="chip-count">{c._count?.products ?? 0}</span>
+              <Link to={`/catalogue?category=${c.slug}`} className="category-tile">
+                {c.imageUrl && <img src={c.imageUrl} alt="" loading="lazy" width={600} height={800} />}
+                <span className="category-tile-label">
+                  {c.name}
+                  <span className="chip-count">{c._count?.products ?? 0}</span>
+                </span>
               </Link>
             </li>
           ))}

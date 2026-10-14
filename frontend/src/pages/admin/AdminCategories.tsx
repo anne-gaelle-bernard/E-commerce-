@@ -6,6 +6,7 @@ import { Alert, FormField } from "../../components/FormField";
 export function AdminCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
 
   const load = () => api.categories().then(setCategories);
@@ -25,13 +26,19 @@ export function AdminCategories() {
 
   async function handleCreate(e: FormEvent) {
     e.preventDefault();
-    await run(() => api.admin.createCategory(name));
+    await run(() => api.admin.createCategory(name, imageUrl));
     setName("");
+    setImageUrl("");
   }
 
   function rename(category: Category) {
     const newName = window.prompt("Nouveau nom", category.name);
-    if (newName && newName !== category.name) run(() => api.admin.updateCategory(category.id, newName));
+    if (newName && newName !== category.name) run(() => api.admin.updateCategory(category.id, newName, category.imageUrl));
+  }
+
+  function changeImage(category: Category) {
+    const url = window.prompt("URL de la photo", category.imageUrl ?? "");
+    if (url !== null) run(() => api.admin.updateCategory(category.id, category.name, url));
   }
 
   function remove(category: Category) {
@@ -44,6 +51,7 @@ export function AdminCategories() {
       {error && <Alert>{error}</Alert>}
       <form onSubmit={handleCreate} className="inline-form">
         <FormField label="Nouvelle catégorie" required minLength={2} value={name} onChange={(e) => setName(e.target.value)} />
+        <FormField label="Photo (URL)" type="url" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
         <button type="submit" className="button">Ajouter</button>
       </form>
       <table className="table table-responsive">
@@ -53,10 +61,16 @@ export function AdminCategories() {
         <tbody>
           {categories.map((c) => (
             <tr key={c.id}>
-              <td data-label="Nom">{c.name}</td>
+              <td data-label="Nom">
+                <span className="admin-product">
+                  {c.imageUrl ? <img src={c.imageUrl} alt="" width={40} height={52} className="admin-thumb" /> : <span className="admin-thumb color-image-empty" />}
+                  {c.name}
+                </span>
+              </td>
               <td data-label="Produits">{c._count?.products ?? 0}</td>
               <td data-label="Actions" className="actions">
                 <button type="button" className="link-button" onClick={() => rename(c)}>Renommer</button>
+                <button type="button" className="link-button" onClick={() => changeImage(c)}>Photo</button>
                 <button type="button" className="link-button danger" disabled={(c._count?.products ?? 0) > 0}
                   title={(c._count?.products ?? 0) > 0 ? "Catégorie utilisée par des produits" : undefined}
                   onClick={() => remove(c)}>

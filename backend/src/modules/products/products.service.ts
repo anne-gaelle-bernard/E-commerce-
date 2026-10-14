@@ -14,6 +14,7 @@ const ORDER_BY: Record<ProductQuery["sort"], Prisma.ProductOrderByWithRelationIn
 const productInclude = {
   category: true,
   variants: { orderBy: { id: "asc" } },
+  images: { orderBy: { id: "asc" } },
 } satisfies Prisma.ProductInclude;
 
 export async function listProducts(query: ProductQuery, isAdmin: boolean) {
@@ -84,9 +85,14 @@ async function uniqueSlug(name: string, excludeId?: number) {
 }
 
 export async function createProduct(data: ProductInput) {
-  const { variants, ...fields } = data;
+  const { variants, images, ...fields } = data;
   return prisma.product.create({
-    data: { ...fields, slug: await uniqueSlug(fields.name), variants: { create: variants } },
+    data: {
+      ...fields,
+      slug: await uniqueSlug(fields.name),
+      variants: { create: variants },
+      images: { create: images },
+    },
     include: productInclude,
   });
 }
@@ -94,7 +100,7 @@ export async function createProduct(data: ProductInput) {
 // les déclinaisons absentes du formulaire sont supprimées, les autres créées ou mises à jour
 export async function updateProduct(id: number, data: ProductInput) {
   const existing = await getProductById(id);
-  const { variants, ...fields } = data;
+  const { variants, images, ...fields } = data;
   const key = (v: { size: string; color: string }) => `${v.size}|${v.color}`;
   const wanted = new Set(variants.map(key));
   const toDelete = existing.variants.filter((v) => !wanted.has(key(v))).map((v) => v.id);
@@ -103,6 +109,8 @@ export async function updateProduct(id: number, data: ProductInput) {
   await prisma.$transaction([
     prisma.product.update({ where: { id }, data: { ...fields, slug } }),
     prisma.productVariant.deleteMany({ where: { id: { in: toDelete } } }),
+    prisma.productImage.deleteMany({ where: { productId: id } }),
+    prisma.productImage.createMany({ data: images.map((img) => ({ ...img, productId: id })) }),
     ...variants.map((v) =>
       prisma.productVariant.upsert({
         where: { productId_size_color: { productId: id, size: v.size, color: v.color } },

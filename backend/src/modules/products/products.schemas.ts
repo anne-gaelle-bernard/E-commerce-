@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+const imageSchema = z.object({
+  color: z.string().trim().min(1).max(30),
+  url: z.string().trim().url().max(500),
+});
+
 const variantSchema = z.object({
   size: z.string().trim().min(1).max(10),
   color: z.string().trim().min(1).max(30),
@@ -16,11 +21,20 @@ export const productSchema = z
     categoryId: z.number().int().positive(),
     isActive: z.boolean().default(true),
     variants: z.array(variantSchema).min(1, "Au moins une déclinaison est requise").max(100),
+    images: z.array(imageSchema).max(30).default([]),
   })
   .refine(
     (p) => new Set(p.variants.map((v) => `${v.size}|${v.color}`)).size === p.variants.length,
     { message: "Chaque couple taille / couleur doit être unique", path: ["variants"] },
-  );
+  )
+  .refine((p) => p.images.every((img) => p.variants.some((v) => v.color === img.color)), {
+    message: "Chaque photo doit correspondre à une couleur des déclinaisons",
+    path: ["images"],
+  })
+  .refine((p) => new Set(p.images.map((img) => img.color)).size === p.images.length, {
+    message: "Une seule photo par couleur",
+    path: ["images"],
+  });
 
 export const productQuerySchema = z.object({
   search: z.string().trim().max(100).optional(),

@@ -76,6 +76,7 @@ const EMPTY_PRODUCT: ProductInput = {
   categoryId: 0,
   isActive: true,
   variants: [{ size: "M", color: "", stock: 0 }],
+  images: [],
 };
 
 export function AdminProductForm() {
@@ -111,11 +112,19 @@ export function AdminProductForm() {
           categoryId: p.categoryId,
           isActive: p.isActive,
           variants: p.variants.map(({ size, color, stock }) => ({ size, color, stock })),
+          images: p.images.map(({ color, url }) => ({ color, url })),
         });
         setPrice((p.priceCents / 100).toFixed(2));
       });
     }
   }, [id, isNew]);
+
+  const colors = [...new Set(form.variants.map((v) => v.color.trim()).filter(Boolean))];
+  const imageUrls = Object.fromEntries(form.images.map((img) => [img.color, img.url]));
+
+  function setImage(color: string, url: string) {
+    setForm({ ...form, images: [...form.images.filter((img) => img.color !== color), { color, url }] });
+  }
 
   function setVariant(index: number, field: "size" | "color" | "stock", value: string) {
     const variants = form.variants.map((v, i) =>
@@ -128,7 +137,9 @@ export function AdminProductForm() {
     e.preventDefault();
     setError("");
     setErrors({});
-    const data = { ...form, priceCents: Math.round(Number(price.replace(",", ".")) * 100) };
+    // une photo par couleur réellement déclinée, les champs vides sont ignorés
+    const images = colors.map((color) => ({ color, url: imageUrls[color]?.trim() ?? "" })).filter((img) => img.url);
+    const data = { ...form, images, priceCents: Math.round(Number(price.replace(",", ".")) * 100) };
     try {
       if (isNew) await api.admin.createProduct(data);
       else await api.admin.updateProduct(Number(id), data);
@@ -191,6 +202,20 @@ export function AdminProductForm() {
           + Ajouter une déclinaison
         </button>
       </fieldset>
+
+      {colors.length > 0 && (
+        <fieldset>
+          <legend>Photos par couleur</legend>
+          <p className="small muted">La photo s’affiche quand le client choisit ce coloris.</p>
+          {errors.images && <p className="field-error">{errors.images}</p>}
+          {colors.map((color) => (
+            <div key={color} className="color-image-row">
+              {imageUrls[color] ? <img src={imageUrls[color]} alt="" width={48} height={64} /> : <span className="color-image-empty" />}
+              <FormField label={color} type="url" placeholder="https://…" value={imageUrls[color] ?? ""} onChange={(e) => setImage(color, e.target.value)} />
+            </div>
+          ))}
+        </fieldset>
+      )}
 
       <div className="form-actions">
         <button type="submit" className="button">Enregistrer</button>

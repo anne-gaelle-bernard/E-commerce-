@@ -213,7 +213,6 @@ legend { font-size: 0.85rem; font-weight: 600; padding: 0; margin-bottom: 0.6rem
 
 /* Fiche produit */
 .product-detail { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
-.product-detail > img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-lg); position: sticky; top: 84px; }
 .product-detail h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 0.75rem; }
 .breadcrumb { font-size: 0.85rem; color: var(--muted); margin: 1rem 0; }
 .breadcrumb a { text-decoration: none; }
@@ -294,7 +293,7 @@ address { font-style: normal; line-height: 1.7; }
 
 @media (max-width: 900px) {
   .catalog, .product-detail, .cart-layout, .admin, .footer-grid { grid-template-columns: 1fr; }
-  .filters, .summary, .admin-nav, .product-detail > img { position: static; }
+  .filters, .summary, .admin-nav { position: static; }
   .admin-nav { flex-direction: row; flex-wrap: wrap; }
   .catalog .filters-toggle { display: flex; width: 100%; }
   .filters:not(.filters-open) { display: none; }
@@ -490,7 +489,6 @@ address { font-style: normal; line-height: 1.7; }
   .main-nav a { flex: 1; text-align: center; }
   .admin { grid-template-columns: minmax(0, 1fr); }
   .product-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-  .product-detail > img { max-height: 640px; }
   .admin-nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; border-radius: 999px; }
   .admin-nav a { flex: none; }
   .checkout-layout .summary { order: -1; }
@@ -512,4 +510,34 @@ address { font-style: normal; line-height: 1.7; }
   .page-head h1 { font-size: 2.4rem; }
   .logout { display: none; }
   .account-nav .pill-link { padding: 0.4rem 0.75rem; }
+}
+
+/* Photos par coloris et catégories illustrées */
+.product-gallery { position: sticky; top: 84px; display: flex; flex-direction: column; gap: 0.75rem; }
+.product-main-image { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-lg); background: var(--soft); animation: fade-in 0.35s var(--ease); }
+.product-thumbs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.product-thumbs button { padding: 0; border: 2px solid transparent; border-radius: 12px; background: none; overflow: hidden; transition: border-color 0.2s; }
+.product-thumbs button.active { border-color: var(--ink); }
+.product-thumbs img { width: 64px; height: 85px; object-fit: cover; display: block; }
+@keyframes fade-in { from { opacity: 0.35; } to { opacity: 1; } }
+.product-card-image img { animation: fade-in 0.35s var(--ease); }
+.swatch-button { width: 1.1rem; height: 1.1rem; padding: 0; border: none; cursor: pointer; transition: box-shadow 0.15s; }
+.swatch-button.active { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 0 2px #fff, 0 0 0 3.5px var(--ink); }
+.swatches { gap: 0.45rem; align-items: center; padding: 0.15rem; }
+.category-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.category-tile { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: var(--radius-lg); background: var(--soft); text-decoration: none; }
+.category-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.category-tile:hover img { transform: scale(1.05); }
+.category-tile-label { position: absolute; left: 0.75rem; bottom: 0.75rem; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.6rem 0.5rem 1rem; border-radius: 999px; background: #fff; color: var(--ink); font-weight: 600; font-size: 0.92rem; transition: background 0.2s; }
+.category-tile:hover .category-tile-label { background: var(--accent); }
+.category-tile-label .chip-count { background: var(--soft); }
+.color-image-row { display: grid; grid-template-columns: 48px 1fr; gap: 0.75rem; align-items: end; }
+.color-image-row img, .color-image-empty { width: 48px; height: 64px; object-fit: cover; border-radius: 8px; margin-bottom: 1.1rem; background: var(--soft); display: block; }
+@media (max-width: 900px) {
+  .category-grid { grid-template-columns: repeat(2, 1fr); }
+  .product-gallery { position: static; }
+  .product-main-image { max-height: 640px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-main-image, .product-card-image img { animation: none; }
 }

@@ -45,11 +45,13 @@ UTILISATEUR (id, email, mot_de_passe_hash, prénom, nom, rôle, date_création)
 CATÉGORIE (id, nom, slug)
 PRODUIT (id, nom, slug, description, prix, image, genre, actif, date_création)
 DÉCLINAISON (id, taille, couleur, stock)
+PHOTO (id, couleur, url)
 COMMANDE (id, statut, frais_livraison, total, adresse_livraison…, date)
 LIGNE_COMMANDE (id, nom_produit, taille, couleur, prix_unitaire, quantité)
 
 APPARTENIR       : PRODUIT (1,1) --- (0,n) CATÉGORIE
 DÉCLINER         : DÉCLINAISON (1,1) --- (1,n) PRODUIT
+ILLUSTRER        : PHOTO (1,1) --- (0,n) PRODUIT   [une photo par couleur]
 METTRE_AU_PANIER : UTILISATEUR (0,n) --- (0,n) DÉCLINAISON   [quantité]
 PASSER           : COMMANDE (0,1) --- (0,n) UTILISATEUR
 CONTENIR         : LIGNE_COMMANDE (1,1) --- (1,n) COMMANDE
@@ -72,6 +74,7 @@ erDiagram
     users |o--o{ orders : "passe"
     categories ||--o{ products : "regroupe"
     products ||--|{ product_variants : "se décline en"
+    products ||--o{ product_images : "est illustré par"
     product_variants ||--o{ cart_items : "est ajoutée"
     product_variants |o--o{ order_items : "est commandée"
     orders ||--|{ order_items : "contient"
@@ -89,6 +92,13 @@ erDiagram
         int id PK
         varchar name UK
         varchar slug UK
+        varchar image_url "nullable"
+    }
+    product_images {
+        int id PK
+        varchar color
+        varchar url
+        int product_id FK "UK(product_id, color)"
     }
     products {
         int id PK

@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { Alert, FormField } from "../components/FormField";
 import { formatPrice, shippingCost } from "../lib/format";
+import { imageFor } from "../lib/images";
 import {
   BRAND_LABELS,
   detectBrand,
@@ -170,7 +171,7 @@ export function CheckoutPage() {
             {cart.items.map((i) => (
               <li key={i.id}>
                 <span className="summary-thumb">
-                  <img src={i.variant.product.imageUrl} alt="" width={56} height={72} />
+                  <img src={imageFor(i.variant.product, i.variant.color)} alt="" width={56} height={72} />
                   <span className="summary-qty">{i.quantity}</span>
                 </span>
                 <span className="summary-name">

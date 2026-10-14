@@ -15,6 +15,7 @@ export interface Category {
   id: number;
   name: string;
   slug: string;
+  imageUrl?: string | null;
   _count?: { products: number };
 }
 
@@ -39,6 +40,13 @@ export interface Product {
   categoryId: number;
   category: Category;
   variants: Variant[];
+  images: ProductImage[];
+}
+
+export interface ProductImage {
+  id?: number;
+  color: string;
+  url: string;
 }
 
 export interface ProductPage {
@@ -112,6 +120,7 @@ export interface ProductInput {
   categoryId: number;
   isActive: boolean;
   variants: { size: string; color: string; stock: number }[];
+  images: { color: string; url: string }[];
 }
 
 export interface AdminStats {

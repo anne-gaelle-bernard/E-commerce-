@@ -7,7 +7,7 @@ export async function getCart(userId: number) {
   const items = await prisma.cartItem.findMany({
     where: { userId },
     orderBy: { id: "asc" },
-    include: { variant: { include: { product: true } } },
+    include: { variant: { include: { product: { include: { images: true } } } } },
   });
   const totalCents = items.reduce((sum, i) => sum + i.quantity * i.variant.product.priceCents, 0);
   const count = items.reduce((sum, i) => sum + i.quantity, 0);

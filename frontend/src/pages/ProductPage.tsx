@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ApiError, api } from "../api/client";
 import type { Product } from "../api/types";
 import { useAuth } from "../context/AuthContext";
@@ -7,9 +7,11 @@ import { useCart } from "../context/CartContext";
 import { Alert } from "../components/FormField";
 import { GENDER_LABELS, formatPrice } from "../lib/format";
 import { swatch } from "../lib/colors";
+import { imageFor } from "../lib/images";
 
 export function ProductPage() {
   const { slug = "" } = useParams();
+  const [params, setParams] = useSearchParams();
   const { user } = useAuth();
   const { add } = useCart();
   const navigate = useNavigate();
@@ -26,7 +28,9 @@ export function ProductPage() {
       .product(slug)
       .then((p) => {
         setProduct(p);
-        setColor(p.variants.find((v) => v.stock > 0)?.color ?? p.variants[0]?.color ?? "");
+        const requested = params.get("couleur");
+        const available = p.variants.find((v) => v.stock > 0)?.color ?? p.variants[0]?.color ?? "";
+        setColor(requested && p.variants.some((v) => v.color === requested) ? requested : available);
         setSize("");
       })
       .catch(() => setNotFound(true));
@@ -46,6 +50,13 @@ export function ProductPage() {
   }
   if (!product) return <p className="muted">Chargement…</p>;
 
+  // la couleur choisie est gardée dans l’URL : un lien partagé ouvre le bon coloris
+  function chooseColor(c: string) {
+    setColor(c);
+    setSize("");
+    setParams({ couleur: c }, { replace: true });
+  }
+
   async function handleAdd() {
     if (!selected) return;
     if (!user) {
@@ -62,7 +73,19 @@ export function ProductPage() {
 
   return (
     <div className="product-detail">
-      <img src={product.imageUrl} alt={product.name} width={600} height={800} />
+      <div className="product-gallery">
+        <img key={color} className="product-main-image" src={imageFor(product, color)} alt={`${product.name}, coloris ${color}`} width={800} height={1067} />
+        {product.images.length > 1 && (
+          <div className="product-thumbs" role="group" aria-label="Photos par coloris">
+            {product.images.map((img) => (
+              <button key={img.color} type="button" className={img.color === color ? "active" : undefined}
+                aria-label={`Voir le coloris ${img.color}`} aria-pressed={img.color === color} onClick={() => chooseColor(img.color)}>
+                <img src={img.url} alt="" width={80} height={107} loading="lazy" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       <div>
         <nav aria-label="Fil d'Ariane" className="breadcrumb">
           <Link to="/catalogue">Catalogue</Link> /{" "}
@@ -82,10 +105,7 @@ export function ProductPage() {
                 type="button"
                 className={`option ${c === color ? "option-selected" : ""}`}
                 aria-pressed={c === color}
-                onClick={() => {
-                  setColor(c);
-                  setSize("");
-                }}
+                onClick={() => chooseColor(c)}
               >
                 <span className="swatch" style={{ background: swatch(c) }} aria-hidden="true" />
                 {c}

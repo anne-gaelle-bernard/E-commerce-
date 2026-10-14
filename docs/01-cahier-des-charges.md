@@ -27,7 +27,7 @@ Le projet consiste à concevoir et développer une application web e-commerce s�
 | US01 | visiteur | parcourir les produits par collection (femme / homme) et catégorie | trouver rapidement ce qui m'intéresse | Must |
 | US02 | visiteur | filtrer par taille disponible, couleur et prix, et trier les résultats | ne voir que les articles adaptés | Must |
 | US03 | visiteur | rechercher un produit par mot-clé | accéder directement à un article | Should |
-| US04 | visiteur | voir la fiche d'un produit et choisir couleur et taille | connaître la disponibilité exacte | Must |
+| US04 | visiteur | voir la fiche d'un produit, choisir couleur et taille et voir la photo du coloris choisi | connaître la disponibilité exacte et l'aspect du vêtement | Must |
 
 ### Compte et commande
 | ID | En tant que… | je veux… | afin de… | Priorité |

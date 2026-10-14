@@ -7,7 +7,10 @@ import { requireAdmin } from "../../middlewares/auth.js";
 
 export const categoriesRouter = Router();
 
-const categorySchema = z.object({ name: z.string().trim().min(2).max(60) });
+const categorySchema = z.object({
+  name: z.string().trim().min(2).max(60),
+  imageUrl: z.string().trim().url().max(500).nullish(),
+});
 
 categoriesRouter.get("/", async (_req, res) => {
   const categories = await prisma.category.findMany({
@@ -18,15 +21,15 @@ categoriesRouter.get("/", async (_req, res) => {
 });
 
 categoriesRouter.post("/", requireAdmin, async (req, res) => {
-  const { name } = categorySchema.parse(req.body);
-  const category = await prisma.category.create({ data: { name, slug: slugify(name) } });
+  const { name, imageUrl } = categorySchema.parse(req.body);
+  const category = await prisma.category.create({ data: { name, slug: slugify(name), imageUrl } });
   res.status(201).json(category);
 });
 
 categoriesRouter.put("/:id", requireAdmin, async (req, res) => {
   const { id } = idParam.parse(req.params);
-  const { name } = categorySchema.parse(req.body);
-  const category = await prisma.category.update({ where: { id }, data: { name, slug: slugify(name) } });
+  const { name, imageUrl } = categorySchema.parse(req.body);
+  const category = await prisma.category.update({ where: { id }, data: { name, slug: slugify(name), imageUrl } });
   res.json(category);
 });
 

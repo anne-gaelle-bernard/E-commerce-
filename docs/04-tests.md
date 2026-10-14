@@ -21,13 +21,13 @@ lancement, puis chaque test part de tables vides (`TRUNCATE`), ce qui les rend i
 | Connexion | succès, message identique email inconnu / mauvais mot de passe, déconnexion, jeton falsifié |
 | RGPD | export des données sans hash, suppression avec confirmation du mot de passe, commandes conservées |
 | Catalogue | pagination, produits archivés masqués, filtres prix / taille, tri, paramètres invalides (400) |
-| Admin produits | 401 visiteur / 403 client, création avec slug unique, synchronisation des déclinaisons, archivage |
+| Admin produits | 401 visiteur / 403 client, création avec slug unique, synchronisation des déclinaisons, photos par couleur (création, remplacement, couleur inconnue refusée), archivage |
 | Panier | ajout cumulatif, total, quantité > stock (409), modification, suppression |
 | Commande | création + décrément du stock + panier vidé, panier vide (400), **rollback complet si stock insuffisant**, validation de l'adresse, protection IDOR |
 | Paiement | carte acceptée (seuls marque + 4 derniers chiffres stockés), cartes refusées (402, stock et panier intacts), numéro invalide (Luhn), carte expirée, CVC American Express |
 | Admin commandes | 403 client, annulation avec remise en stock, transition interdite (400) |
 
-Résultat actuel : **57 tests back-end** et **10 tests front-end**, tous au vert.
+Résultat actuel : **59 tests back-end** et **11 tests front-end**, tous au vert.
 
 ## 4.3 Cahier de recette (tests manuels)
 
