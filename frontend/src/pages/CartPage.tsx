@@ -26,16 +26,25 @@ export function CartPage() {
 
   if (cart.items.length === 0) {
     return (
-      <div className="empty-state">
-        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
-          <path d="M5 8h14l-1 13H6L5 8z" />
-          <path d="M9 8V6a3 3 0 0 1 6 0v2" />
-        </svg>
-        <h1>Votre panier est vide</h1>
-        <p>Nos nouveautés n'attendent que vous.</p>
-        <Link to="/catalogue" className="button">
-          Découvrir la collection
-        </Link>
+      <div className="empty-cart">
+        <div className="empty-state">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
+            <path d="M5 8h14l-1 13H6L5 8z" />
+            <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+          </svg>
+          <h1>Votre panier est vide</h1>
+          <p>Nos nouveautés n'attendent que vous.</p>
+          <Link to="/catalogue" className="button">
+            Découvrir la collection
+          </Link>
+        </div>
+        <img
+          className="empty-cart-image"
+          src="https://images.unsplash.com/photo-1568125789396-c17c53160be5?w=900&h=1100&fit=crop&q=80&auto=format"
+          alt="Femme en cardigan camel"
+          width={900}
+          height={1100}
+        />
       </div>
     );
   }

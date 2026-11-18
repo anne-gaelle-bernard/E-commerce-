@@ -3,6 +3,14 @@ import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-do
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 
+const STRIP = [
+  { id: "1467043237213-65f2da53396f", alt: "T-shirt blanc, jean gris et bottines posés à plat" },
+  { id: "1557303696-f0a415dc1b3e", alt: "Pull en maille torsadée rouille et pelote de laine" },
+  { id: "1573879500655-98f2012dd1db", alt: "Hauts aux tons pêche suspendus sur un portant" },
+  { id: "1603400521630-9f2de124b33b", alt: "Portants de vêtements écrus et rouille dans une boutique claire" },
+  { id: "1556905055-8f358a7a47b2", alt: "Bonnet rouille, pull gris et jean posés sur un drap blanc" },
+];
+
 function UserIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
@@ -89,6 +97,26 @@ export function Layout() {
       <main id="main" className="container main">
         <Outlet />
       </main>
+
+      <section className="container photo-strip" aria-label="Maison Lune en images">
+        <div className="photo-strip-head">
+          <p className="footer-tagline">Portés au quotidien</p>
+          <p className="muted small">#maisonlune</p>
+        </div>
+        <ul className="photo-strip-list">
+          {STRIP.map((p) => (
+            <li key={p.id}>
+              <img
+                src={`https://images.unsplash.com/photo-${p.id}?w=500&h=500&fit=crop&q=75&auto=format`}
+                alt={p.alt}
+                loading="lazy"
+                width={500}
+                height={500}
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <footer className="site-footer">
         <div className="container footer-grid">
