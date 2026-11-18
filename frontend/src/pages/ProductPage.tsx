@@ -42,13 +42,28 @@ export function ProductPage() {
 
   if (notFound) {
     return (
-      <div>
+      <div className="empty-state">
         <h1>Produit introuvable</h1>
-        <Link to="/catalogue">Retour au catalogue</Link>
+        <p>Cet article n’existe plus ou a été retiré de la collection.</p>
+        <Link to="/catalogue" className="button">
+          Retour au catalogue
+        </Link>
       </div>
     );
   }
-  if (!product) return <p className="muted">Chargement…</p>;
+  if (!product) {
+    return (
+      <div className="product-detail skeleton-product" role="status" aria-label="Chargement du produit">
+        <div className="skeleton skeleton-image" />
+        <div>
+          <div className="skeleton skeleton-title" />
+          <div className="skeleton skeleton-line short" />
+          <div className="skeleton skeleton-block" />
+          <div className="skeleton skeleton-block" />
+        </div>
+      </div>
+    );
+  }
 
   // la couleur choisie est gardée dans l’URL : un lien partagé ouvre le bon coloris
   function chooseColor(c: string) {
@@ -86,15 +101,17 @@ export function ProductPage() {
           </div>
         )}
       </div>
-      <div>
+      <div className="product-info">
         <nav aria-label="Fil d'Ariane" className="breadcrumb">
           <Link to="/catalogue">Catalogue</Link> /{" "}
           <Link to={`/catalogue?category=${product.category.slug}`}>{product.category.name}</Link>
         </nav>
+        <p className="eyebrow">
+          {GENDER_LABELS[product.gender]} · {product.category.name}
+        </p>
         <h1>{product.name}</h1>
         <p className="price price-large">{formatPrice(product.priceCents)}</p>
-        <p className="muted">{GENDER_LABELS[product.gender]}</p>
-        <p>{product.description}</p>
+        <p className="product-description">{product.description}</p>
 
         <fieldset>
           <legend>Couleur : {color}</legend>
@@ -131,7 +148,7 @@ export function ProductPage() {
               </button>
             ))}
           </div>
-          {selected && selected.stock <= 3 && <p className="warning small">Plus que {selected.stock} en stock</p>}
+          {selected && selected.stock <= 3 && <p className="warning small stock-hint">Plus que {selected.stock} en stock</p>}
         </fieldset>
 
         <div className="add-to-cart">
@@ -150,6 +167,11 @@ export function ProductPage() {
             {message.text} {message.type === "success" && <Link to="/panier">Voir le panier</Link>}
           </Alert>
         )}
+        <ul className="reassurance product-reassurance">
+          <li>Livraison offerte dès 80 €, en 2 à 4 jours ouvrés</li>
+          <li>Retours gratuits sous 14 jours</li>
+          <li>Matières naturelles, fabriqué en Europe</li>
+        </ul>
       </div>
     </div>
   );

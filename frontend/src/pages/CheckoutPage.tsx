@@ -51,7 +51,7 @@ export function CheckoutPage() {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  if (!loaded) return <p className="muted">Chargement…</p>;
+  if (!loaded) return <p className="muted loading-text" role="status">Chargement…</p>;
   if (cart.items.length === 0 && !submitting) return <Navigate to="/panier" replace />;
 
   const setField = (field: keyof ShippingAddress) => (e: React.ChangeEvent<HTMLInputElement>) =>

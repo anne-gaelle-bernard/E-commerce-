@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
@@ -25,6 +26,15 @@ export function Layout() {
   const { cart } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+
+  // la bordure de l'en-tête n'apparaît que lorsque le contenu passe dessous
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // NavLink ne compare que le chemin : on tient compte du filtre ?gender= pour le lien actif
   const gender = location.pathname === "/catalogue" ? new URLSearchParams(location.search).get("gender") ?? "ALL" : null;
@@ -40,7 +50,7 @@ export function Layout() {
       <a href="#main" className="skip-link">
         Aller au contenu
       </a>
-      <header className="site-header">
+      <header className={scrolled ? "site-header scrolled" : "site-header"}>
         <div className="container header-inner">
           <Link to="/" className="logo" aria-label="Maison Lune, accueil">
             maison lune<span className="logo-dot">.</span>

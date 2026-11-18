@@ -27,7 +27,7 @@ export function AdminDashboard() {
     api.admin.stats().then(setStats);
   }, []);
 
-  if (!stats) return <p className="muted">Chargement…</p>;
+  if (!stats) return <p className="muted loading-text" role="status">Chargement…</p>;
 
   return (
     <section>

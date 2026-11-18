@@ -35,7 +35,7 @@ export function OrdersPage() {
     api.orders().then(setOrders);
   }, []);
 
-  if (!orders) return <p className="muted">Chargement…</p>;
+  if (!orders) return <p className="muted loading-text" role="status">Chargement…</p>;
 
   return (
     <section>
@@ -142,7 +142,7 @@ export function OrderPage() {
       </div>
     );
   }
-  if (!order) return <p className="muted">Chargement…</p>;
+  if (!order) return <p className="muted loading-text" role="status">Chargement…</p>;
 
   return (
     <section>

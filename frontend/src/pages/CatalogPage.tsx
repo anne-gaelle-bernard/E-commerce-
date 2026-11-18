@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 import { api } from "../api/client";
 import type { Category, ProductPage } from "../api/types";
-import { ProductCard } from "../components/ProductCard";
+import { ProductCard, ProductGridSkeleton } from "../components/ProductCard";
 
 const photo = (id: string) =>
   `https://images.unsplash.com/photo-${id}?w=1400&h=800&fit=crop&crop=faces,center&q=80&auto=format`;
@@ -56,6 +56,11 @@ export function CatalogPage() {
     else next.delete(key);
     if (key !== "page") next.delete("page");
     setParams(next);
+  }
+
+  function resetFilters() {
+    setSearch("");
+    setParams(gender ? { gender } : {});
   }
 
   function handleSearch(e: FormEvent) {
@@ -138,7 +143,7 @@ export function CatalogPage() {
             </select>
           </div>
 
-          <button type="button" className="button-secondary" onClick={() => { setSearch(""); setParams(gender ? { gender } : {}); }}>
+          <button type="button" className="button-secondary" onClick={resetFilters}>
             Réinitialiser
           </button>
         </aside>
@@ -157,8 +162,18 @@ export function CatalogPage() {
             </div>
           </div>
 
-          {error && <p className="field-error">{error}</p>}
-          {result && (
+          {error && <p className="alert alert-error">{error}</p>}
+          {!result && !error && <ProductGridSkeleton count={6} />}
+          {result && result.items.length === 0 && (
+            <div className="empty-state">
+              <h2>Aucun produit trouvé</h2>
+              <p>Essayez une autre taille, couleur ou un prix plus élevé.</p>
+              <button type="button" className="button" onClick={resetFilters}>
+                Réinitialiser les filtres
+              </button>
+            </div>
+          )}
+          {result && result.items.length > 0 && (
             <>
               <div className="product-grid">
                 {result.items.map((p) => (

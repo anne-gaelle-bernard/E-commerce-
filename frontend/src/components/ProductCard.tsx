@@ -44,3 +44,24 @@ export function ProductCard({ product }: { product: Product }) {
     </article>
   );
 }
+
+/** Carte fantôme affichée pendant le chargement des produits. */
+export function ProductCardSkeleton() {
+  return (
+    <div className="skeleton-card" aria-hidden="true">
+      <div className="skeleton skeleton-image" />
+      <div className="skeleton skeleton-line" />
+      <div className="skeleton skeleton-line short" />
+    </div>
+  );
+}
+
+export function ProductGridSkeleton({ count }: { count: number }) {
+  return (
+    <div className="product-grid" role="status" aria-label="Chargement des produits">
+      {Array.from({ length: count }, (_, i) => (
+        <ProductCardSkeleton key={i} />
+      ))}
+    </div>
+  );
+}

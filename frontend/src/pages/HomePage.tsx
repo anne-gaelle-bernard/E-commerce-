@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
 import type { Category, Product } from "../api/types";
-import { ProductCard } from "../components/ProductCard";
+import { ProductCard, ProductGridSkeleton } from "../components/ProductCard";
 
 const photo = (id: string, w: number, h: number) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&q=80&auto=format`;
@@ -93,11 +93,15 @@ export function HomePage() {
             Tout voir →
           </Link>
         </div>
-        <div className="product-grid">
-          {latest.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        {total === null ? (
+          <ProductGridSkeleton count={4} />
+        ) : (
+          <div className="product-grid">
+            {latest.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
       </section>
 
       <section aria-labelledby="categories-title" className="home-section">
