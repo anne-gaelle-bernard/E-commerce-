@@ -22,7 +22,10 @@ export class ApiError extends Error {
   }
 }
 
-const API_BASE = "https://e-commerce-production-d3253638.up.railway.app";
+const API_BASE =
+  window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? ""
+    : "https://e-commerce-production-d3253638.up.railway.app";
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`${API_BASE}/api${path}`, {
