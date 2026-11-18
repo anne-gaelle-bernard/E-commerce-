@@ -22,10 +22,12 @@ export class ApiError extends Error {
   }
 }
 
+const API_BASE = "https://e-commerce-production-d3253638.up.railway.app";
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const response = await fetch(`/api${path}`, {
+  const response = await fetch(`${API_BASE}/api${path}`, {
     ...options,
-    credentials: "same-origin",
+    credentials: "include",
     headers: options.body ? { "Content-Type": "application/json", ...options.headers } : options.headers,
   });
   if (response.status === 204) return undefined as T;

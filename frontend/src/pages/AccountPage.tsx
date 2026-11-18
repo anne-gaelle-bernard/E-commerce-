@@ -83,7 +83,7 @@ export function AccountPage() {
         <section className="card" aria-labelledby="rgpd-title">
           <h2 id="rgpd-title">Mes données</h2>
           <p className="muted">Téléchargez l'ensemble des données liées à votre compte (RGPD).</p>
-          <a href="/api/auth/me/export" className="button button-secondary" download>
+          <a href="https://e-commerce-production-d3253638.up.railway.app/api/auth/me/export" className="button button-secondary" download>
             Télécharger mes données
           </a>
 

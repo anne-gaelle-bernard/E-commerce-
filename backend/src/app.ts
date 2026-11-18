@@ -17,7 +17,18 @@ export function createApp() {
   app.disable("x-powered-by");
   app.set("trust proxy", env.trustProxy);
   app.use(helmet());
-  app.use(cors({ origin: env.clientUrl, credentials: true }));
+  app.use(
+    cors({
+      origin: (origin, callback) => {
+        const allowedOrigins = new Set([
+          env.clientUrl,
+          "https://e-commerce-snowy-eight-72.vercel.app",
+        ]);
+        callback(null, !origin || allowedOrigins.has(origin));
+      },
+      credentials: true,
+    }),
+  );
   app.use(express.json({ limit: "100kb" }));
   app.use(cookieParser());
 

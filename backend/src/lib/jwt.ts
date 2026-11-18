@@ -26,7 +26,7 @@ export function verifyToken(token: string): TokenPayload {
 export const cookieOptions = {
   httpOnly: true,
   secure: env.isProduction,
-  sameSite: "strict" as const,
+  sameSite: (env.isProduction ? "none" : "strict") as "none" | "strict",
   maxAge: TOKEN_TTL_SECONDS * 1000,
   path: "/",
 };
