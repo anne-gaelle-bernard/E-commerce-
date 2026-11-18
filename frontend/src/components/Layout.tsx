@@ -58,7 +58,7 @@ export function Layout() {
       <a href="#main" className="skip-link">
         Aller au contenu
       </a>
-      <header className={scrolled ? "site-header scrolled" : "site-header"}>
+      <header className={`site-header${scrolled ? " scrolled" : ""}${location.pathname === "/" && !scrolled ? " on-sky" : ""}`}>
         <div className="container header-inner">
           <Link to="/" className="logo" aria-label="Maison Lune, accueil">
             maison lune<span className="logo-dot">.</span>

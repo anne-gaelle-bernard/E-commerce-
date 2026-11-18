@@ -6,8 +6,8 @@ description: "Naturel & terreux" visual direction for the Maison Lune storefront
 # Maison Lune — direction « Naturel & terreux »
 
 An alternative art direction for Maison Lune, the sustainable fashion shop
-(French UI, `lang="fr"`). Where the current `design` skill is minimal editorial
-(white, near-black, acid lime), this one tells the brand's story: **natural
+(French UI, `lang="fr"`). Where the current `design` skill is a bold "sky poster"
+look (sky blue, citron, condensed Anton capitals), this one tells the brand's story: **natural
 materials, slow fashion, warmth**. Think linen, raw clay, dried herbs, unbleached
 cotton — calm, tactile, a little handmade, never rustic or kitsch.
 
