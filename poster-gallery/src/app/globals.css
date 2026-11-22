@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-anton), Impact, sans-serif;
+}
+
+html.no-scroll,
+html.no-scroll body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+
+@layer components {
+  /* Option pills on the product page */
+  .chip {
+    @apply inline-flex h-10 items-center rounded-full border border-neutral-300 bg-white px-4 text-[13px] font-medium transition hover:border-neutral-950;
+  }
+  .chip-active {
+    @apply border-neutral-950 bg-neutral-950 text-white;
+  }
+  /* Previous and next buttons in the gallery bar */
+  .nav-btn {
+    @apply grid h-10 w-10 flex-none place-items-center rounded-full bg-neutral-950 text-white transition hover:bg-neutral-700;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

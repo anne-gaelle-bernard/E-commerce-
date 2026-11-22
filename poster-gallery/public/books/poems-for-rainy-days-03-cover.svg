@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <rect width="600" height="900" fill="#3a1f3d"/>
+  
+      <circle cx="300" cy="396" r="180" fill="#f6bd60"/>
+      <path d="M 0 450 q 150 -26 300 0 t 300 0 L 600 900 L 0 900 Z" fill="#3a1f3d" opacity="0.55"/><path d="M 0 484 q 150 -26 300 0 t 300 0 L 600 900 L 0 900 Z" fill="#c77dff" opacity="0.63"/><path d="M 0 518 q 150 -26 300 0 t 300 0 L 600 900 L 0 900 Z" fill="#3a1f3d" opacity="0.7100000000000001"/><path d="M 0 552 q 150 -26 300 0 t 300 0 L 600 900 L 0 900 Z" fill="#c77dff" opacity="0.79"/><path d="M 0 586 q 150 -26 300 0 t 300 0 L 600 900 L 0 900 Z" fill="#3a1f3d" opacity="0.8700000000000001"/><path d="M 0 620 q 150 -26 300 0 t 300 0 L 600 900 L 0 900 Z" fill="#c77dff" opacity="0.9500000000000001"/>
+  <rect x="0" y="630" width="600" height="270" fill="#3a1f3d" opacity="0.92"/>
+  <text x="48" y="670" font-family="Impact, 'Arial Narrow', sans-serif" font-size="82" fill="#fff3e0">LETTERS TO</text><text x="48" y="747.9" font-family="Impact, 'Arial Narrow', sans-serif" font-size="82" fill="#fff3e0">THE TIDE</text>
+  <text x="48" y="859.5" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="28" fill="#fff3e0" opacity="0.85">Noor Haddad</text>
+  <rect x="536" y="832.5" width="34" height="34" fill="none" stroke="#fff3e0" stroke-width="3"/>
+  <text x="553" y="857.5" text-anchor="middle" font-family="Impact, 'Arial Narrow', sans-serif" font-size="20" fill="#fff3e0">M</text>
+  <rect x="0" y="0" width="14" height="900" fill="#000" opacity="0.18"/>
+</svg>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="900" viewBox="0 0 120 900">
+  <rect width="120" height="900" fill="#dde6ee"/>
+  <rect x="0" y="40" width="120" height="6" fill="#4f6d8f"/>
+  <rect x="0" y="854" width="120" height="6" fill="#4f6d8f"/>
+  <g transform="translate(76 80) rotate(90)">
+    <text x="0" y="0" font-family="Impact, 'Arial Narrow', sans-serif" font-size="44" fill="#1f2d3d">UMBRELLA HOURS</text>
+  </g>
+  <g transform="translate(34 80) rotate(90)">
+    <text x="0" y="0" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="22" fill="#1f2d3d" opacity="0.8">Noor Haddad</text>
+  </g>
+  <text x="60" y="830" text-anchor="middle" font-family="Impact, 'Arial Narrow', sans-serif" font-size="30" fill="#1f2d3d">M</text>
+</svg>

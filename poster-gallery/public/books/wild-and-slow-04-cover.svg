@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <rect width="600" height="900" fill="#e7efdc"/>
+  
+      <circle cx="420" cy="198" r="60" fill="#a3c585"/>
+      <path d="M 0 558 L 180 252.00000000000003 L 300 432 L 420 270 L 600 558 Z" fill="#3f7d3a"/>
+      <path d="M 180 252.00000000000003 L 216 324 L 180 306 L 150 315 Z" fill="#e7efdc"/>
+      <path d="M 0 648 L 120 450 L 270 594 L 450 414 L 600 648 Z" fill="#1d2e1a"/>
+  <rect x="0" y="630" width="600" height="270" fill="#e7efdc" opacity="0.92"/>
+  <text x="48" y="645" font-family="Impact, 'Arial Narrow', sans-serif" font-size="66" fill="#1d2e1a">A YEAR</text><text x="48" y="707.7" font-family="Impact, 'Arial Narrow', sans-serif" font-size="66" fill="#1d2e1a">WITHOUT</text><text x="48" y="770.4" font-family="Impact, 'Arial Narrow', sans-serif" font-size="66" fill="#1d2e1a">HURRY</text>
+  <text x="48" y="859.5" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="28" fill="#1d2e1a" opacity="0.85">Lea Martin</text>
+  <rect x="536" y="832.5" width="34" height="34" fill="none" stroke="#1d2e1a" stroke-width="3"/>
+  <text x="553" y="857.5" text-anchor="middle" font-family="Impact, 'Arial Narrow', sans-serif" font-size="20" fill="#1d2e1a">M</text>
+  <rect x="0" y="0" width="14" height="900" fill="#000" opacity="0.18"/>
+</svg>

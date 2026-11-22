@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <rect width="600" height="900" fill="#dff3f7"/>
+  <circle cx="300" cy="360" r="40" fill="none" stroke="#1e293b" stroke-width="2" opacity="1"/><circle cx="300" cy="360" r="74" fill="none" stroke="#0ea5b7" stroke-width="2" opacity="0.9"/><circle cx="300" cy="360" r="108" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.8"/><circle cx="300" cy="360" r="142" fill="none" stroke="#0ea5b7" stroke-width="6" opacity="0.7"/><circle cx="300" cy="360" r="176" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.6"/><circle cx="300" cy="360" r="210" fill="none" stroke="#0ea5b7" stroke-width="2" opacity="0.5"/><circle cx="300" cy="360" r="244" fill="none" stroke="#1e293b" stroke-width="2" opacity="0.3999999999999999"/><circle cx="268.3032632807028" cy="384.3991164050578" r="8.1373775228858" fill="#0f172a"/><circle cx="372.99743171517844" cy="372.1398090177671" r="11.2927868925035" fill="#0f172a"/><circle cx="300.78136816391486" cy="467.9971734064944" r="12.568990468978882" fill="#0f172a"/><circle cx="221.20912525590825" cy="478.1355071816295" r="7.376449916511774" fill="#0f172a"/><circle cx="405.0288974914765" cy="501.22652262137206" r="12.151301719248295" fill="#0f172a"/><circle cx="202.13954381693253" cy="174.19544915249807" r="12.362086307257414" fill="#0f172a"/><circle cx="224.44156722579768" cy="127.99370000643012" r="6.131345346570015" fill="#0f172a"/><circle cx="300" cy="360" r="26" fill="#0ea5b7"/>
+  <rect x="0" y="630" width="600" height="270" fill="#dff3f7" opacity="0.92"/>
+  <text x="48" y="670" font-family="Impact, 'Arial Narrow', sans-serif" font-size="82" fill="#0f172a">COLD</text><text x="48" y="747.9" font-family="Impact, 'Arial Narrow', sans-serif" font-size="82" fill="#0f172a">ENGINES</text>
+  <text x="48" y="859.5" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="28" fill="#0f172a" opacity="0.85">Henrik Saar</text>
+  <rect x="536" y="832.5" width="34" height="34" fill="none" stroke="#0f172a" stroke-width="3"/>
+  <text x="553" y="857.5" text-anchor="middle" font-family="Impact, 'Arial Narrow', sans-serif" font-size="20" fill="#0f172a">M</text>
+  <rect x="0" y="0" width="14" height="900" fill="#000" opacity="0.18"/>
+</svg>

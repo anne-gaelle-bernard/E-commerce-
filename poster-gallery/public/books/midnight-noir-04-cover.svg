@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <rect width="600" height="900" fill="#1a0b0b"/>
+  
+      <rect x="72" y="72" width="456" height="558" fill="#d62828"/>
+      <path d="M 300 180 c 40 0 62 34 56 76 c 50 18 74 60 80 140 l 6 156 l -284 0 l 6 -156 c 6 -80 30 -122 80 -140 c -6 -42 16 -76 56 -76 z" fill="#050101"/>
+      <rect x="180" y="135" width="240" height="20" fill="#050101"/>
+      <path d="M 204.00000000000003 135 q 96 -70 192 0" fill="#050101"/>
+      <line x1="72" y1="90" x2="528" y2="60" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="130" x2="528" y2="100" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="170" x2="528" y2="140" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="210" x2="528" y2="180" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="250" x2="528" y2="220" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="290" x2="528" y2="260" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="330" x2="528" y2="300" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="370" x2="528" y2="340" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="410" x2="528" y2="380" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="450" x2="528" y2="420" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="490" x2="528" y2="460" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="530" x2="528" y2="500" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="570" x2="528" y2="540" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/><line x1="72" y1="610" x2="528" y2="580" stroke="#1a0b0b" stroke-width="2" opacity="0.4"/>
+  <rect x="0" y="630" width="600" height="270" fill="#1a0b0b" opacity="0.92"/>
+  <text x="48" y="711" font-family="Impact, 'Arial Narrow', sans-serif" font-size="82" fill="#fbeee0">RED LEDGER</text>
+  <text x="48" y="859.5" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="28" fill="#fbeee0" opacity="0.85">Clara Holm</text>
+  <rect x="536" y="832.5" width="34" height="34" fill="none" stroke="#fbeee0" stroke-width="3"/>
+  <text x="553" y="857.5" text-anchor="middle" font-family="Impact, 'Arial Narrow', sans-serif" font-size="20" fill="#fbeee0">M</text>
+  <rect x="0" y="0" width="14" height="900" fill="#000" opacity="0.18"/>
+</svg>
